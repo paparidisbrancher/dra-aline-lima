@@ -233,12 +233,21 @@ p{margin:0 0 1em;text-wrap:pretty}
 @media (max-width:899px){
   .nav .botao{display:none}
   .abrir-menu{display:inline-flex}
-  .capa{grid-template-columns:1fr;margin-top:0}
-  .capa-foto{order:-1;min-height:0;aspect-ratio:5/4;max-height:52svh;border-radius:0 0 28px 28px;margin:0 12px}
-  .capa-foto img{object-position:50% 12%}
-  .capa-texto{padding:28px var(--gutter) 64px}
-  .local{margin-bottom:14px}
-  .capa .lead{margin:18px 0 26px}
+  /* Capa no celular: foto de ponta a ponta, fundo escuro e texto por cima.
+     A barra fixa só aparece depois da capa, então desconta só o cabeçalho (76px)
+     e o botão de agendar da capa continua visível. */
+  .capa{display:flex;flex-direction:column;margin-top:0;min-height:calc(100svh - 76px);background:var(--tinta);color:var(--marfim)}
+  .capa-foto{order:-1;flex:1 0 auto;min-height:min(133vw,64svh);margin:0;border-radius:0}
+  .capa-foto img{object-position:50% 18%}
+  .capa-foto::after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(to bottom,transparent,var(--tinta));pointer-events:none}
+  .capa-texto{position:relative;z-index:1;margin-top:-130px;padding:0 var(--gutter) 36px}
+  .capa .local{margin-bottom:10px;color:color-mix(in srgb,var(--marfim) 78%,transparent)}
+  .capa h1{font-size:clamp(2.3rem,10vw,3.2rem)}
+  .capa h1 em{color:var(--areia)}
+  .capa .lead{margin:14px 0 22px;color:color-mix(in srgb,var(--marfim) 84%,transparent)}
+  .capa .botao{background:var(--marfim);color:var(--tinta)}
+  .capa .link{color:var(--marfim);text-decoration-color:var(--areia)}
+  .capa :focus-visible{outline-color:var(--marfim)}
   .principios,.passos{grid-template-columns:1fr 1fr}
   .tratamentos .envolve,.sobre .envolve,.consultorio .envolve,.duvidas .envolve{grid-template-columns:1fr}
   .tratamentos-cab{position:static}
